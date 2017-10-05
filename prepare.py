@@ -21,13 +21,15 @@ for f in fold.namelist():
 
 # Move up to student dir
 for f in fold.namelist():
-  sources = ['/'.join(x.split('/')[:-1]) for x in fold.namelist()]
-  for source in sources:
-    student_dir = '/'.join(f.split("/")[:2])
-    files = os.listdir(source)
-    for f in files:
-      if os.path.exists(f):
-        shutil.move(f, student_dir)
+  if 'c_henneb' in f:
+    a=1
+  student_dir = '/'.join(f.split("/")[:2])
+  source = '/'.join(f.split("/")[:-1])
+  files = os.listdir(source)
+  for fi in files:
+    path = source + "/" + fi
+    if os.path.exists(path):
+      shutil.move(os.path.join(source, fi), os.path.join(student_dir, fi))
 
 # Remove useless dirs
 print('cleaning up directories')
